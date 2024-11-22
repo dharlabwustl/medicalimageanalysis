@@ -3,7 +3,6 @@ import os
 # Repository and structure details
 repo_url = "https://raw.githubusercontent.com/dharlabwustl/medicalimageanalysis/master"
 # import os
-
 # Repository and structure details
 # repo_url = "https://raw.githubusercontent.com/yourusername/problem-solutions/main"
 chapters = {
