@@ -1,57 +1,56 @@
 import os
+import json
 
 # Repository and structure details
 repo_url = "https://raw.githubusercontent.com/dharlabwustl/medicalimageanalysis/master"
-# import os
-
-# Repository and structure details
-# repo_url = "https://raw.githubusercontent.com/yourusername/problem-solutions/main"
 chapters = {
     "chapter1": ["problem1.py", "problem2.py"],
     "chapter2": ["problem1.py", "problem2.py"]
 }
 
-# Correct Notebook Template using f-strings
+# Function to create a valid JSON notebook structure
 def create_notebook(repo_url, chapter, problem):
-    return f"""{{
- "cells": [
-  {{
-   "cell_type": "code",
-   "metadata": {{}},
-   "source": [
-    "# Install any necessary libraries (optional)\\n",
-    "# Uncomment and modify as needed\\n",
-    "# !pip install numpy matplotlib\\n\\n",
-    "# Download the problem solution from GitHub\\n",
-    "!wget -O problem.py {repo_url}/{chapter}/{problem}\\n",
-    "\\n",
-    "# Execute the solution\\n",
-    "%run problem.py\\n"
-   ]
-  }}
- ],
- "metadata": {{
-  "colab": {{
-   "name": "{chapter}_{problem.replace('.py', '')}.ipynb",
-   "provenance": []
-  }},
-  "kernelspec": {{
-   "display_name": "Python 3",
-   "language": "python",
-   "name": "python3"
-  }}
- }},
- "nbformat": 4,
- "nbformat_minor": 0
-}}"""
+    return {
+        "cells": [
+            {
+                "cell_type": "code",
+                "metadata": {},
+                "source": [
+                    "# Install any necessary libraries (optional)\n",
+                    "# Uncomment and modify as needed\n",
+                    "# !pip install numpy matplotlib\n\n",
+                    "# Download the problem solution from GitHub\n",
+                    f"!wget -O problem.py {repo_url}/{chapter}/{problem}\n\n",
+                    "# Execute the solution\n",
+                    "%run problem.py\n"
+                ]
+            }
+        ],
+        "metadata": {
+            "colab": {
+                "name": f"{chapter}_{problem.replace('.py', '')}.ipynb",
+                "provenance": []
+            },
+            "kernelspec": {
+                "display_name": "Python 3",
+                "language": "python",
+                "name": "python3"
+            }
+        },
+        "nbformat": 4,
+        "nbformat_minor": 0
+    }
 
 # Generate Notebooks
 for chapter, problems in chapters.items():
     os.makedirs(chapter, exist_ok=True)
     for problem in problems:
+        # Create the notebook content
         notebook_content = create_notebook(repo_url, chapter, problem)
+        # Define the notebook file name
         notebook_name = f"{chapter}/{problem.replace('.py', '.ipynb')}"
+        # Write the notebook content as JSON
         with open(notebook_name, "w") as f:
-            f.write(notebook_content)
+            json.dump(notebook_content, f, indent=2)
 
 print("Notebooks generated!")
