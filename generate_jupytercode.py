@@ -23,7 +23,8 @@ def create_notebook(repo_url, chapter, problem):
     "# Uncomment and modify as needed\\n",
     "# !pip install numpy matplotlib\\n\\n",
     "# Download the problem solution from GitHub\\n",
-    "!wget -O problem.py {repo_url}/{chapter}/{problem}\\n\\n",
+    "!wget -O problem.py {repo_url}/{chapter}/{problem}\\n",
+    "\\n",
     "# Execute the solution\\n",
     "%run problem.py\\n"
    ]
@@ -31,7 +32,7 @@ def create_notebook(repo_url, chapter, problem):
  ],
  "metadata": {{
   "colab": {{
-   "name": "{chapter}_{problem}.ipynb",
+   "name": "{chapter}_{problem.replace('.py', '')}.ipynb",
    "provenance": []
   }},
   "kernelspec": {{
