@@ -1,6 +1,9 @@
-# Given values for x and y
-x = 5
-y = 20
+
+# Scalar Case: Solve A = y / x
+
+# Given values
+x = 2
+y = 10
 
 # Solve for A
 if x != 0:

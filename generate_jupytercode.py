@@ -1,10 +1,14 @@
 import os
 import json
-
+import glob
 # Repository and structure details
+chapter1files=glob.glob('chapter1/*.py')
+chapper1files_basename=[]
+for filename in chapter1files:
+    chapper1files_basename.append(os.path.basename(filename))
 repo_url = "https://raw.githubusercontent.com/dharlabwustl/medicalimageanalysis/master"
 chapters = {
-    "chapter1": ["problem1.py", "problem2.py"],
+    "chapter1": chapper1files_basename, #["scalar_case_example.py", "problem1.py", "problem2.py"],
     "chapter2": ["problem1.py", "problem2.py"]
 }
 
